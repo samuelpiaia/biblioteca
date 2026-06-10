@@ -1,0 +1,26 @@
+tela de listagen de fornecedors
+
+<?php 
+    include("config/config.php");
+
+    $sql = "SELECT * FROM fornecedores ORDER BY id DESC";
+    $consulta = $pdo->query($sql);
+    $fornecedores = $consulta->fetch(PDO::FETCH_ASSOC);
+
+
+?>
+<table border="1" width="80%" >
+    <tr>
+        <th>id</th>
+        <th>nome</th>
+        <th>contato</th>
+        
+    </tr>
+    <?php foreach($fornecedores as $fornecedor): ?>
+        <tr>
+            <td><?php echo $fornecedor['id']; ?></td>
+            <td><?php echo $fornecedor['nome']; ?></td>
+            <td><?php echo $fornecedor['contato']; ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estokei | Gestão de Estoque</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script type="text/javascript" src="assets/js/tailwind.js"></script>
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+</head>
+<body class="bg-estokei-bg text-estokei-textMain font-sans overflow-hidden antialiased selection:bg-estokei-accent selection:text-estokei-bg">
+
+    <div class="flex h-screen w-full">
+
+        <!-- ================= SIDEBAR ================= -->
+        <!-- Overlay for mobile -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity" onclick="toggleSidebar()"></div>
+        
+        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-72 bg-estokei-panel border-r border-white/5 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col h-full shadow-2xl lg:shadow-none">
+            
+            <!-- Logo Area -->
+            <div class="h-20 flex items-center px-8 border-b border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-estokei-bg rounded-xl shadow-neon border border-estokei-accent/20">
+                        <i class="ph ph-package text-2xl text-estokei-accent"></i>
+                    </div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">
+                        esto<span class="text-estokei-accent">k</span>ei
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-2">
+                <p class="px-4 text-xs font-semibold text-estokei-textMuted uppercase tracking-wider mb-2">Menu Principal</p>
+                
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-estokei-bg text-estokei-accent border border-estokei-accent/20 shadow-neon transition-all">
+                    <i class="ph ph-squares-four text-xl"></i>
+                    <span class="font-medium">Painel Principal</span>
+                </a>
+                
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-estokei-textMuted hover:text-white hover:bg-estokei-panelHover transition-all group">
+                    <i class="ph ph-boxes text-xl group-hover:text-estokei-accent transition-colors"></i>
+                    <span class="font-medium">Produtos</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-estokei-textMuted hover:text-white hover:bg-estokei-panelHover transition-all group">
+                    <i class="ph ph-arrows-left-right text-xl group-hover:text-estokei-accent transition-colors"></i>
+                    <span class="font-medium">Movimentações</span>
+                    <span class="ml-auto bg-estokei-accent text-estokei-bg text-xs font-bold px-2 py-0.5 rounded-full">12</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-estokei-textMuted hover:text-white hover:bg-estokei-panelHover transition-all group">
+                    <i class="ph ph-truck text-xl group-hover:text-estokei-accent transition-colors"></i>
+                    <span class="font-medium">Fornecedores</span>
+                </a>
+
+                <p class="px-4 text-xs font-semibold text-estokei-textMuted uppercase tracking-wider mt-8 mb-2">Análises</p>
+
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-estokei-textMuted hover:text-white hover:bg-estokei-panelHover transition-all group">
+                    <i class="ph ph-chart-line-up text-xl group-hover:text-estokei-accent transition-colors"></i>
+                    <span class="font-medium">Relatórios</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-estokei-textMuted hover:text-white hover:bg-estokei-panelHover transition-all group">
+                    <i class="ph ph-gear text-xl group-hover:text-estokei-accent transition-colors"></i>
+                    <span class="font-medium">Configurações</span>
+                </a>
+            </nav>
+
+            <!-- User Widget -->
+            <div class="p-4 border-t border-white/5">
+                <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-estokei-panelHover cursor-pointer transition-all">
+                    <img src="https://i.pravatar.cc/150?img=32" alt="User Profile" class="w-10 h-10 rounded-full border-2 border-estokei-accent/50">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-white truncate">Admin Sistema</p>
+                        <p class="text-xs text-estokei-textMuted truncate">admin@estokei.com.br</p>
+                    </div>
+                    <i class="ph ph-sign-out text-estokei-textMuted hover:text-estokei-danger transition-colors text-xl"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <div class="flex-1 flex flex-col min-w-0 bg-estokei-bg relative">
+            
+            <!-- Header -->
+            <header class="h-20 glass sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8">
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg text-estokei-textMuted hover:text-white hover:bg-white/5 transition-colors">
+                        <i class="ph ph-list text-2xl"></i>
+                    </button>
+                    
+                    <div class="hidden sm:flex items-center relative group">
+                        <i class="ph ph-magnifying-glass absolute left-3 text-estokei-textMuted group-focus-within:text-estokei-accent transition-colors"></i>
+                        <input type="text" placeholder="Buscar em todo estoque..." class="bg-estokei-panel border border-white/10 rounded-full py-2 pl-10 pr-4 w-64 md:w-96 text-sm focus:outline-none focus:border-estokei-accent focus:ring-1 focus:ring-estokei-accent transition-all placeholder-estokei-textMuted text-white">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <button class="p-2 rounded-full relative text-estokei-textMuted hover:text-white hover:bg-white/5 transition-colors">
+                        <i class="ph ph-bell text-xl"></i>
+                        <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-estokei-accent rounded-full border-2 border-estokei-bg shadow-[0_0_8px_rgba(212,255,0,0.8)]"></span>
+                    </button>
+                    <button class="hidden sm:flex items-center gap-2 bg-estokei-accent hover:bg-estokei-accentHover text-estokei-bg font-bold py-2 px-5 rounded-full transition-all shadow-neon hover:shadow-neon-strong transform hover:-translate-y-0.5">
+                        <i class="ph ph-plus-circle text-lg"></i>
+                        <span>Novo Item</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Scrollable Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-4 sm:p-8 space-y-8">
+                
+                <!-- Page Title -->
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-1">Visão Geral</h2>
+                    <p class="text-estokei-textMuted text-sm">Resumo do seu estoque em tempo real hoje.</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-estokei-panel rounded-2xl p-6 border border-white/5 hover:border-estokei-accent/30 transition-all group relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-estokei-accent/10 rounded-full blur-2xl group-hover:bg-estokei-accent/20 transition-all"></div>
+                        <div class="flex justify-between items-start mb-4 relative z-10">
+                            <div>
+                                <p class="text-estokei-textMuted text-sm font-medium mb-1">Total de Itens</p>
+                                <h3 class="text-3xl font-bold text-white">12.450</h3>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl text-blue-400 group-hover:scale-110 transition-transform">
+                                <i class="ph ph-package text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm relative z-10">
+                            <span class="text-estokei-success flex items-center font-medium"><i class="ph ph-trend-up mr-1"></i> +4.5%</span>
+                            <span class="text-estokei-textMuted">desde o mês passado</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-estokei-panel rounded-2xl p-6 border border-white/5 hover:border-estokei-danger/30 transition-all group relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-estokei-danger/10 rounded-full blur-2xl group-hover:bg-estokei-danger/20 transition-all"></div>
+                        <div class="flex justify-between items-start mb-4 relative z-10">
+                            <div>
+                                <p class="text-estokei-textMuted text-sm font-medium mb-1">Estoque Baixo</p>
+                                <h3 class="text-3xl font-bold text-white">34</h3>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl text-estokei-danger group-hover:scale-110 transition-transform">
+                                <i class="ph ph-warning-circle text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm relative z-10">
+                            <span class="text-estokei-danger flex items-center font-medium"><i class="ph ph-trend-up mr-1"></i> +12 hoje</span>
+                            <span class="text-estokei-textMuted">Ação necessária</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-estokei-panel rounded-2xl p-6 border border-white/5 hover:border-estokei-accent/30 transition-all group relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-estokei-accent/10 rounded-full blur-2xl group-hover:bg-estokei-accent/20 transition-all"></div>
+                        <div class="flex justify-between items-start mb-4 relative z-10">
+                            <div>
+                                <p class="text-estokei-textMuted text-sm font-medium mb-1">Valor em Estoque</p>
+                                <h3 class="text-3xl font-bold text-white">R$ 145K</h3>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl text-estokei-accent group-hover:scale-110 transition-transform">
+                                <i class="ph ph-currency-dollar text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm relative z-10">
+                            <span class="text-estokei-success flex items-center font-medium"><i class="ph ph-trend-up mr-1"></i> +1.2%</span>
+                            <span class="text-estokei-textMuted">desde o mês passado</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-estokei-panel rounded-2xl p-6 border border-white/5 hover:border-estokei-warning/30 transition-all group relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-estokei-warning/10 rounded-full blur-2xl group-hover:bg-estokei-warning/20 transition-all"></div>
+                        <div class="flex justify-between items-start mb-4 relative z-10">
+                            <div>
+                                <p class="text-estokei-textMuted text-sm font-medium mb-1">Entradas Pendentes</p>
+                                <h3 class="text-3xl font-bold text-white">12</h3>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl text-estokei-warning group-hover:scale-110 transition-transform">
+                                <i class="ph ph-truck text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm relative z-10">
+                            <span class="text-estokei-warning flex items-center font-medium">Previstos para hoje</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Main Chart -->
+                    <div class="lg:col-span-2 bg-estokei-panel rounded-2xl p-6 border border-white/5">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-bold text-white">Fluxo de Movimentação (Anual)</h3>
+                            <button class="text-sm text-estokei-textMuted hover:text-estokei-accent transition-colors flex items-center gap-1">
+                                Exportar <i class="ph ph-download-simple"></i>
+                            </button>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="movementChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Donut Chart -->
+                    <div class="bg-estokei-panel rounded-2xl p-6 border border-white/5">
+                        <h3 class="text-lg font-bold text-white mb-6">Distribuição por Categoria</h3>
+                        <div class="chart-container flex justify-center items-center">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table & Form Section -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                    
+                    <!-- Table -->
+                    <div class="xl:col-span-2 bg-estokei-panel rounded-2xl border border-white/5 overflow-hidden">
+                        <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                            <h3 class="text-lg font-bold text-white">Últimas Movimentações</h3>
+                            <div class="flex items-center gap-3 w-full sm:w-auto">
+                                <div class="relative flex-1 sm:flex-none">
+                                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-estokei-textMuted"></i>
+                                    <input type="text" id="tableSearch" placeholder="Pesquisar item, SKU ou status..." class="bg-estokei-bg border border-white/10 rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none focus:border-estokei-accent focus:ring-1 focus:ring-estokei-accent transition-all placeholder-estokei-textMuted text-white w-full sm:w-64">
+                                </div>
+                                <a href="#" class="text-sm text-estokei-accent hover:text-estokei-accentHover transition-colors font-medium whitespace-nowrap hidden sm:block">Ver todas &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-white/5 text-estokei-textMuted text-xs uppercase tracking-wider">
+                                        <th class="p-4 font-semibold">Produto</th>
+                                        <th class="p-4 font-semibold">Tipo</th>
+                                        <th class="p-4 font-semibold">Quantidade</th>
+                                        <th class="p-4 font-semibold">Data</th>
+                                        <th class="p-4 font-semibold">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="movementsTableBody" class="divide-y divide-white/5 text-sm">
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-white/10">
+                                                <i class="ph ph-laptop text-xl text-gray-300"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-white">MacBook Pro M2</p>
+                                                <p class="text-xs text-estokei-textMuted">SKU: MAC-001</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-4"><span class="flex items-center gap-1 text-estokei-success"><i class="ph ph-arrow-down-left"></i> Entrada</span></td>
+                                        <td class="p-4 font-medium text-white">+ 25 unid.</td>
+                                        <td class="p-4 text-estokei-textMuted">Hoje, 10:45</td>
+                                        <td class="p-4">
+                                            <span class="px-3 py-1 rounded-full bg-estokei-success/10 text-estokei-success text-xs font-bold border border-estokei-success/20">Concluído</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-white/10">
+                                                <i class="ph ph-chair text-xl text-gray-300"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-white">Cadeira Ergonômica</p>
+                                                <p class="text-xs text-estokei-textMuted">SKU: MVR-042</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-4"><span class="flex items-center gap-1 text-estokei-danger"><i class="ph ph-arrow-up-right"></i> Saída</span></td>
+                                        <td class="p-4 font-medium text-white">- 4 unid.</td>
+                                        <td class="p-4 text-estokei-textMuted">Ontem, 16:30</td>
+                                        <td class="p-4">
+                                            <span class="px-3 py-1 rounded-full bg-estokei-success/10 text-estokei-success text-xs font-bold border border-estokei-success/20">Concluído</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-white/10">
+                                                <i class="ph ph-mouse text-xl text-gray-300"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-white">Mouse Sem Fio PRO</p>
+                                                <p class="text-xs text-estokei-textMuted">SKU: PER-110</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-4"><span class="flex items-center gap-1 text-estokei-success"><i class="ph ph-arrow-down-left"></i> Entrada</span></td>
+                                        <td class="p-4 font-medium text-white">+ 50 unid.</td>
+                                        <td class="p-4 text-estokei-textMuted">Ontem, 09:15</td>
+                                        <td class="p-4">
+                                            <span class="px-3 py-1 rounded-full bg-estokei-warning/10 text-estokei-warning text-xs font-bold border border-estokei-warning/20">Pendente</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-white/10">
+                                                <i class="ph ph-monitor text-xl text-gray-300"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-white">Monitor Ultrawide 34"</p>
+                                                <p class="text-xs text-estokei-textMuted">SKU: MON-088</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-4"><span class="flex items-center gap-1 text-estokei-danger"><i class="ph ph-arrow-up-right"></i> Saída</span></td>
+                                        <td class="p-4 font-medium text-white">- 2 unid.</td>
+                                        <td class="p-4 text-estokei-textMuted">18 Mai, 14:20</td>
+                                        <td class="p-4">
+                                            <span class="px-3 py-1 rounded-full bg-estokei-success/10 text-estokei-success text-xs font-bold border border-estokei-success/20">Concluído</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Quick Add Form -->
+                    <div class="bg-estokei-panel rounded-2xl p-6 border border-white/5 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-2 bg-estokei-accent/10 rounded-lg text-estokei-accent">
+                                <i class="ph ph-lightning text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Registro Rápido</h3>
+                        </div>
+                        
+                        <form class="space-y-4 flex-1 flex flex-col" onsubmit="event.preventDefault();">
+                            <div>
+                                <label class="block text-xs font-semibold text-estokei-textMuted uppercase tracking-wider mb-2">Código do Produto (SKU)</label>
+                                <div class="relative">
+                                    <i class="ph ph-barcode absolute left-3 top-1/2 transform -translate-y-1/2 text-estokei-textMuted"></i>
+                                    <input type="text" placeholder="Ex: PROD-001" class="w-full bg-estokei-bg border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:border-estokei-accent focus:ring-1 focus:ring-estokei-accent transition-all text-white placeholder-estokei-textMuted">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-estokei-textMuted uppercase tracking-wider mb-2">Operação</label>
+                                    <select class="w-full bg-estokei-bg border border-white/10 rounded-xl py-3 px-4 text-sm focus:outline-none focus:border-estokei-accent focus:ring-1 focus:ring-estokei-accent transition-all text-white appearance-none">
+                                        <option value="in">Entrada</option>
+                                        <option value="out">Saída</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-estokei-textMuted uppercase tracking-wider mb-2">Qtd.</label>
+                                    <input type="number" placeholder="0" class="w-full bg-estokei-bg border border-white/10 rounded-xl py-3 px-4 text-sm focus:outline-none focus:border-estokei-accent focus:ring-1 focus:ring-estokei-accent transition-all text-white placeholder-estokei-textMuted">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-estokei-textMuted uppercase tracking-wider mb-2">Observações</label>
+                                <textarea rows="2" placeholder="Motivo da movimentação..." class="w-full bg-estokei-bg border border-white/10 rounded-xl py-3 px-4 text-sm focus:outline-none focus:border-estokei-accent focus:ring-1 focus:ring-estokei-accent transition-all text-white placeholder-estokei-textMuted resize-none"></textarea>
+                            </div>
+
+                            <div class="pt-4 mt-auto">
+                                <button type="submit" class="w-full bg-estokei-accent hover:bg-estokei-accentHover text-estokei-bg font-bold py-3 rounded-xl transition-all shadow-neon hover:shadow-neon-strong transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                                    <i class="ph ph-check-circle text-xl"></i>
+                                    Registrar Movimentação
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <footer class="pt-8 pb-4 text-center text-sm text-estokei-textMuted border-t border-white/5 mt-8">
+                    &copy; 2026 Estokei - Sistema de Gestão de Estoque. Todos os direitos reservados.
+                </footer>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+</html>
