@@ -11,7 +11,8 @@ CREATE TABLE livros (
     genero VARCHAR(100),
     faixa_etaria VARCHAR(20),
     disponivel BOOLEAN DEFAULT TRUE,
-    data_devolucao DATE DEFAULT NULL
+    data_devolucao DATE DEFAULT NULL,
+    likes INT NOT NULL
 );
 
 CREATE TABLE usuarios (
@@ -23,3 +24,7 @@ CREATE TABLE usuarios (
     ativo BOOLEAN DEFAULT TRUE,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+

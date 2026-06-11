@@ -1,6 +1,6 @@
 <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-72 bg-biblioteca-panel border-r border-white/5 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col h-full shadow-2xl lg:shadow-none">
             
-    <div class="h-20 flex items-center px-8 border-b border-white/5">
+    <div class="h-20 flex items-center px-8 border-b">
         <div class="flex items-center gap-3">
             <div class="p-2 bg-biblioteca-bg rounded-xl shadow-neon border border-biblioteca-accent/20">
                 <i class="ph ph-books text-2xl text-biblioteca-accent"></i>
