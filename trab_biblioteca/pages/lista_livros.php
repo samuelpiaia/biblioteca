@@ -109,15 +109,12 @@
                             
                             <td class="p-4">
                                 <div class="flex items-center justify-center gap-2">
-                                    <button class="p-2 rounded-lg text-estokei-textMuted hover:text-estokei-accent hover:bg-estokei-accent/10 transition-colors" title="Editar">
-                                        <i class="ph ph-pencil-simple text-lg"></i>
-                                    </button>
                                     
                                     <button onclick="if(confirm('Tem certeza que deseja excluir o livro <?php echo addslashes($livro['titulo']); ?>?')) location.href='api/delete.php?id=<?php echo $livro['id_livro']; ?>'" class="p-2 rounded-lg text-estokei-textMuted hover:text-estokei-danger hover:bg-estokei-danger/10 transition-colors" title="Excluir">
                                         <i class="ph ph-trash text-lg"></i>
                                     </button>
 
-                                    <button onclick="location.href='api/emprestar.php?id=<?php echo $livro['id_livro']; ?>&tempo=15'" class="p-2 rounded-lg text-estokei-textMuted hover:text-estokei-danger hover:bg-estokei-danger/10 transition-colors" title="sobre">
+                                    <button onclick="location.href='index.php?page=sobre.php&id=<?php echo $livro['id_livro']; ?>'" class="p-2 rounded-lg text-estokei-textMuted hover:text-estokei-danger hover:bg-estokei-danger/10 transition-colors" title="sobre">
                                         <i class="ph ph-eye text-lg"></i>
                                     </button>
                                 </div>

@@ -106,7 +106,7 @@
             </div>
 
 
-            <?php  if ($livro['disponivel'] == 1) { ?>
+            <?php if ($livro['disponivel'] == 1) { ?>
             <div class="flex flex-col gap-1">
                 <span class="text-xs uppercase tracking-wider text-estokei-textMuted font-semibold">alugar</span>
                 <div class="flex items-center gap-2 text-white font-medium text-base">
