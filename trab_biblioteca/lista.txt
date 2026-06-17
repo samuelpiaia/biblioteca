@@ -24,3 +24,109 @@ tela de listagen de fornecedors
         </tr>
     <?php endforeach; ?>
 </table>
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+<?php
+    include "config/config.php";
+    
+    $sql="SELECT * FROM livros ORDER BY id_livro DESC";
+    $consulta=$pdo->query($sql);
+    $livros=$consulta->fetchAll(PDO::FETCH_ASSOC);
+?>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>titulo</th>
+                <th>autor</th>
+                <th>genero</th>
+                <th>faixa_etaria</th>
+                <th>disponivel</th>
+                <th>datade de volucao</th>
+                <th>likes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($livros as $livro): ?>
+                <td>#<?php echo $livro['id_livro']; ?></td>
+                <td><?php echo $livro['titulo']; ?></td>
+                <td><?php echo $livro['autor']; ?></td>
+                <td><?php echo $livro['genero']; ?></td>
+                <td><?php echo $livro['faixa_etaria']; ?></td>
+                <td><?php echo $livro['disponivel']; ?></td>
+                <td><?php echo $livro['data_devolucao']; ?></td>
+                <td><?php echo $livro['likes']; ?></td>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<?php
+    include "config/config.php";
+
+    if (isset($_GET['id'])) {
+        $id = $_GET['id']; 
+
+
+        $sql="SELECT * FROM livros where id_livro=$id";
+        $consulta=$pdo->query($sql);
+        $livros=$consulta->fetch(PDO::FETCH_ASSOC);
+
+        echo $livros['id_livro'];
+        echo $livros['titulo'];
+        echo $livros['autor'];
+        echo $livros['genero'];
+        echo $livros['faixa_etaria'];
+        echo $livros['disponivel'];
+        echo $livros['data_devolucao'];
+        echo $livros['likes'];
+    }
+        
+?>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<?php
+    include "config/config.php";
+    
+    $sql="SELECT * FROM livros where disponivel=false";
+    $consulta=$pdo->query($sql);
+    $livros=$consulta->fetchAll(PDO::FETCH_ASSOC);
+   
+?>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>titulo</th>
+                <th>autor</th>
+                <th>genero</th>
+                <th>faixa_etaria</th>
+                <th>disponivel</th>
+                <th>datade de volucao</th>
+                <th>likes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($livros as $livro): ?>
+                <td>#<?php echo $livro['id_livro']; ?></td>
+                <td><?php echo $livro['titulo']; ?></td>
+                <td><?php echo $livro['autor']; ?></td>
+                <td><?php echo $livro['genero']; ?></td>
+                <td><?php echo $livro['faixa_etaria']; ?></td>
+                <td><?php echo $livro['disponivel']; ?></td>
+                <td><?php echo $livro['data_devolucao']; ?></td>
+                <td><?php echo $livro['likes']; ?></td>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

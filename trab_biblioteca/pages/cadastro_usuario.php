@@ -78,8 +78,8 @@
                             id="tipo_user"
                             class="w-full bg-estokei-bg border border-white/10 rounded-xl py-3 pl-10 pr-10 text-sm focus:outline-none focus:border-estokei-accent focus:ring-1 focus:ring-estokei-accent transition-all text-white appearance-none relative z-0 cursor-pointer"
                         >
-                            <option value="operador" class="bg-estokei-panel">Operador Padrão</option>
-                            <option value="administrador" class="bg-estokei-panel">Administrador</option>
+                            <option value="cliente" class="bg-estokei-panel">cliente</option>
+                            <option value="ADMIN" class="bg-estokei-panel">Administrador</option>
                         </select>
                         <!-- Ícone customizado de seta para o select -->
                         <i class="ph ph-caret-down absolute right-4 top-1/2 transform -translate-y-1/2 text-estokei-textMuted pointer-events-none"></i>

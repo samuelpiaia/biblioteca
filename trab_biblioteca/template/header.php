@@ -51,8 +51,3 @@
                     </button>
                 </div>
             </header>
-            
-            </div>
-    </div>
-</body>
-</html>

@@ -12,7 +12,7 @@
 
     <div class="bg-biblioteca-panel rounded-2xl shadow-xl border border-white/5 p-6 sm:p-8">
         
-        <form action="cadastrar_livro.php" method="POST" class="space-y-6">
+        <form action="api/cadastrar_livro.php" method="POST" class="space-y-6">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="md:col-span-2">

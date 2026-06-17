@@ -26,7 +26,7 @@
             <span class="font-medium">Cadastro de usuarios</span>
         </a>
         
-        <a href="index.php?page=cadastro_livros.php" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
+        <a href="index.php?page=cadastro_livro.php" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
             <i class="ph ph-book-open text-xl group-hover:text-biblioteca-accent transition-colors"></i>
             <span class="font-medium">Cadastro de Livros</span>
         </a>
@@ -38,17 +38,18 @@
             <span class="font-medium">Lista de usuarios</span>
         </a>
         
-        <a href="index.php?page=lista_produtos.php" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
+        <a href="index.php?page=lista_livros.php" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
             <i class="ph ph-bookshelf text-xl group-hover:text-biblioteca-accent transition-colors"></i>
             <span class="font-medium">Acervo de Livros</span>
         </a>
 
-        <p class="px-4 text-xs font-semibold text-biblioteca-textMuted uppercase tracking-wider mb-2 mt-6">Configurações</p>
         
-        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
-            <i class="ph ph-user-plus text-xl group-hover:text-biblioteca-accent transition-colors"></i>
-            <span class="font-medium">Criar Conta</span>
+        <a href="index.php?page=enprestar_livro.php" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
+            <i class="ph ph-book text-xl group-hover:text-biblioteca-accent transition-colors"></i>
+            <span class="font-medium">alocados</span>
         </a>
+
+        <p class="px-4 text-xs font-semibold text-biblioteca-textMuted uppercase tracking-wider mb-2 mt-6">Configurações</p>
         
         <a href="index.php" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
             <i class="ph ph-info text-xl group-hover:text-biblioteca-accent transition-colors"></i>

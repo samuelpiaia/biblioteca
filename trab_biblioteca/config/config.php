@@ -3,7 +3,7 @@
 $host = 'localhost';
 $dbname = 'biblioteca'; // Substitua pelo nome do seu banco de dados
 $username = 'root';     // Substitua pelo seu usuário do MySQL
-$password = 'samuel';         // Substitua pela sua senha do MySQL
+$password = 'senai';         // Substitua pela sua senha do MySQL
 
 // 2. Estabelecendo a conexão com PDO
 try {
