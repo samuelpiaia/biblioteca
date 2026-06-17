@@ -48,13 +48,7 @@
             <i class="ph ph-book text-xl group-hover:text-biblioteca-accent transition-colors"></i>
             <span class="font-medium">alocados</span>
         </a>
-
-        <p class="px-4 text-xs font-semibold text-biblioteca-textMuted uppercase tracking-wider mb-2 mt-6">Configurações</p>
         
-        <a href="index.php" class="flex items-center gap-3 px-4 py-3 rounded-xl text-biblioteca-textMuted hover:text-white hover:bg-biblioteca-panelHover transition-all group">
-            <i class="ph ph-info text-xl group-hover:text-biblioteca-accent transition-colors"></i>
-            <span class="font-medium">Sobre o Sistema</span>
-        </a>
     </nav>
 
     <div class="p-4 border-t border-white/5">

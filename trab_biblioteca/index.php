@@ -6,7 +6,7 @@
 //1- reiar um novo arquivo na pasta pages 
 //2-adicionar um botao no nosso menu lateral ("sidebar.php") que e a tag "<a>"
 //3- adicionar o link da pagina no "href" da tag "<a>" criada por exemplo: index.php?nome _da_sua_pagina.php 
-if(isset($_GET['page'])){
+if(isset($_GET['page']) && $_GET['page'] != ''){
     $page = $_GET['page'];
 }else{
     $page = "exemplo.php";
